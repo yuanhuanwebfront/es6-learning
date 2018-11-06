@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+
+	// 1. 扩展运算符    ...Array
+	console.log(1, ...[2, 3, 4], 5);
+
+	// 2. 代替数组的apply方法
+	console.log(Math.max.apply(null, [1, 2, 3]));   //  old
+	console.log(Math.max(...[1, 2, 3]));			//	new
+
+	// 3. 合并数组
+	console.log([1, 2, 3].concat([4, 5, 6]));		//	old
+	console.log([...[1, 2, 3], ...[4, 5, 6]]);		//	new
+
+	// 4. 解构赋值 (解构赋值只能放在最后一位)
+	const [first, ...rest] = [1, 2, 3, 4, 5];		//  first = 1   rest = [2, 3, 4, 5]
+	console.log(first);  console.log(rest);
+
+	//	5. 字符串转数组
+	const helloArray = [...'hello'];
+	console.log(helloArray);
+
+	// 6. Array.from  将两类对象转为真正的数组(类数组对象和可遍历对象 map--set )  可以接收第二个参数，用来处理每个元素
+	let arrayLike = {
+		'0': 'a',
+		'1': 'b',
+		'2': 'c',
+		length: 3
+	}
+	var arr = [].slice.call(arrayLike);			//	['a', 'b', 'c']
+	let arr2 = Array.from(arrayLike);			//	['a', 'b', 'c']
+
+	console.log(Array.from([1, 2, 3], x => x * x));
+
+
+	//  7. Array.of  将一组数值转换为数组
+	console.log(Array.of(3, 11, 8));   			//  [3, 11 , 8];
+	console.log(Array.of(3));					//	[3]
+	console.log(new Array(3));					//	[ , , ,]
+
+
+	// 	Array.copyWithin 在当前数组内部，将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组。也就是说，使用这个方法，会修改当前数组。
+	//  @params 	target ----  从该位置开始替换数据
+	//	@params 	start  ----  从该位置开始读取数据，默认为0.如果为负值，表示倒数
+	//	@params     end    ----  从该位置停止读取数据，默认为0.如果为负值，表示倒数
+	console.log([1, 2, 3, 4, 5].copyWithin(0, 3));    	 //  从 index = 3 开始取值，从 index = 0 开始替换
+	console.log([1, 2, 3, 4, 5].copyWithin(1, 3));       //  [1, 4, 5, 4, 5]
+	console.log([1, 2, 3, 4, 5].copyWithin(0, 1));		 //  [2, 3, 4, 5, 5]
+
+	//	Array.find 和  Array.findIndex() 
+</script>
+</html>
