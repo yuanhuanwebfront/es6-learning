@@ -55,6 +55,15 @@
 	console.log([1, 2, 3, 4, 5].copyWithin(1, 3));       //  [1, 4, 5, 4, 5]
 	console.log([1, 2, 3, 4, 5].copyWithin(0, 1));		 //  [2, 3, 4, 5, 5]
 
-	//	Array.find 和  Array.findIndex() 
+	//	Array.find 和  Array.findIndex()  find用来查找数组中第一个在回调函数中返回true的元素
+	console.log([1, 2, 3, 4].find(x => x % 2 === 0)); 		//	2
+	console.log([1, 2, 3, 5].findIndex(x => x > 4));		//	3
+
+	// 	Array.fill	使用定值，填充一个数组
+	// 	@params		fillItem	用来填充的元素
+	//	@params		start		填充开始的位置
+	//	@params		end			填充结束的位置
+	console.log( ['a', 'b', 'c'].fill(7) );					// [7, 7, 7]
+	console.log( ['a', 'b', 'c'].fill('e', 1, 2) );			// ['a', 'e', 'c']
 </script>
 </html>
