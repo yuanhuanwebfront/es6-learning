@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+
+	//	对象的简写
+	let x = 1,
+		y = 2;
+	let obj = {x, y};				//	{x: 1, y: 2}
+	console.log(obj);
+
+	// 对象内部方法的简写
+	let objWithFn = {
+		fn(){
+			return 'i am function';
+		}
+	};
+	console.log(objWithFn.fn());
+
+	//	Object.is()		比较两个值是否相等		它用来比较两个值是否严格相等, 即 === 
+	Object.is('foo', 'foo');			//	true
+	Object.is({}, {});					//	false
+	Object.is(NaN, NaN);				//	true
+
+	// 	Object.assign()		用于对象的合并，将源对象的可枚举属性复制到目标属性；
+	//	@params  target		目标对象
+	//	@params  ...source	源对象
+	let a = {a: 1};
+	Object.assign(a, {b: 2}, {c: 3})
+	console.log(a);			
+	//	执行的是浅拷贝，即就是说源对象某个属性是对象，那么复制过来的只是该属性的引用
+	// 	对于同名属性，执行的是替换操作，而不是添加
+	//	对于数组的复制，assign方法会将数组每一项当作对象的一组属性来处理，如下：
+	Object.assign([1, 2, 3], [4, 5, 6]);  			//	[4, 5, 6]
+
+	// 	遍历对象属性的5种方法
+	for(key in a){}					//	循环遍历对象自身的和继承的可枚举属性
+	Object.keys(a)					//	对象本身所有可枚举属性的数组
+	Object.getOwnPropertyNames(a)	//	返回对象自身所有属性数组
+
+	// 		Object.keys()		Object.values()		Object.entries
+	Object.keys(a);				//	返回一个数组，对象所有的key值
+	Object.values(a)			//	返回一个数字，对象所有的val值
+	Object.entrys(a);			//	a => {a: 1, b: 2}   输出 [ ['a', 1], ['b', 2] ]
+
+	// 	对象的解构	解构赋值必须是最后一个参数
+	let {x, y, ...z} = {x: 1, y: 2, a: 3, b: 4},		//	x -- 1   y -- 2   z -- {a: 3, b: 4}
+
+	// 	扩展运算符后面必须是一个变量名，不能是一个解构赋值表达式。
+	
+	//	let {x, ...{y, z}} = o;		//	error
+
+
+
+
+
+
+</script>
+</html>
