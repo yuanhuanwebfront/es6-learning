@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Generator</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    // Generator函数是一个普通函数，但是有两个特征。    一是 function 关键字和函数名之间有一个星号;
+    //                                               二是函数体内部使用yield表达式，定义不同的内部状态;
+    function* helloWorldGenerator(){
+        yield 'hello';
+        yield 'world';
+        return 'ending';
+    }
+
+    let hw = helloWorldGenerator();
+
+    //  调用generator函数后，函数并不执行，返回的也不是函数运行结果，二是一个遍历器对象
+
+    console.log(hw.next());
+    console.log(hw.next());
+    console.log(hw.next());
+
+    //  必须执行next方法   代码才会继续往下走
+    //  每次遇到yield，函数暂停执行，再返回紧跟再语句后面的表达式的值
+    //  下一次遇到yield，函数继续执行，直到遇到yield为止
+    //  如果没有遇到yield，会继续执行直到遇到return;
+    //  如果yield表达式用在另外一个表达式中，必须放在圆括号中
+    function* demo(i){
+        //console.log('hello' + yield 123);       //..error
+        //console.log('hello' + (yield 123));     //..right
+        console.log(yield i);
+    }
+
+    //  yield  表达式自身没有任何返回值，或者说总是返回undefined，next方法可以带一个参数  这个参数会被当做上一个yield表达式的返回值
+
+    function* generatorReturn(x){
+        let y = 2 * (yield x);          
+        let z = yield(y + 2);
+        return x + y + z;
+    }
+
+    let gr = generatorReturn(5);
+    let step1 = gr.next().value;                 //  函数执行到yield，返回yield后的值;  {value: 5, done: false}
+    let step2 = gr.next(step1);                  //  第二次将step1作为第一步yield的返回值，则y = 2*5,此时第二部返回 y + 2 = 12 {value: 12, done: false}
+    let step3 = gr.next(step2.value);            //   第三次将step2的value作为第二步yield的值传给z,则 z = 12; 此时 x = 5, y = 10, z = 12; x + y + z = 27;
+    console.log(step1, step2, step3);                
+    // console.log(hh.next(true));
+
+
+    //  Generator.prototype.return()    generator实例对象的方法，可以返回给定的值，并终结yield函数遍历
+    function* myReturn(){
+        yield 1;
+        yield 2;
+        yield 3;
+    }
+
+    let myReturnIns = myReturn();
+    console.log(myReturnIns.next());                            //  {value: 1, done: false}
+    console.log(myReturnIns.return('return some'));             //  {value: 'return some', done: true}
+    console.log(myReturnIns.next());                            //  {value: undefined, done: true}
+
+
+
+    //  在generator函数内部调用另外一个generator函数，使用 yield *（等用于在generator内部部署一个 for ... of 循环）
+    function* fn1(){
+        yield 1;
+    }
+
+    function* fn2(){
+        yield 2;
+        yield* fn1();
+    }
+
+    let fn2Instance = fn2();
+    console.log(fn2Instance.next());
+    console.log(fn2Instance.next());    //  不使用yield* value 是一个generator对象;  使用yield*， 返回yield的值
+
+</script>
+</html>
