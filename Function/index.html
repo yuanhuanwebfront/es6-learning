@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    //  1. 函数增加默认值
+    function defineDefault(x, y = 'world'){
+        console.log(x + ', ' + y);
+    }
+
+    defineDefault('hello');
+
+    function Point(x = 0, y = 0){
+        this.x = x;
+        this.y = y;
+    }
+
+    let p = new Point();
+    let p1 = new Point(1);
+    console.log(p);
+    console.log(p1);
+
+    //  对于使用参数默认值声明的变量，无法再次声明；
+
+    //  使用函数默认值时，不能有同名参数
+    function foo(x, x, y){}
+    // function boo(x, x, y = 1){}
+
+    //  参数默认值不是传值的，而是每次都重新计算默认值表达式的值;
+
+    //  与解构赋值结合使用
+    function fooObj({x = 3, y = 4}){
+        console.log(x + ' , ' + y);
+    }
+
+    fooObj({x: 2, y: 1});
+
+    //  fooObj();       //  该句会报错，可以给该值也提供一个默认值
+    fooObj({y: 2});
+
+    function fetch(url, {method = 'GET', header = '', data = {} } = {}){
+        console.log(method);
+    };
+
+    fetch(123, {});
+    fetch();
+
+
+    //  参数默认值中传入undefined，会取默认值；传入null，不会
+
+    
+
+    
+
+</script>
+</html>

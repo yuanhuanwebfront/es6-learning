@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Asycn</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    function setStepOne(val){
+        console.log(val);
+        throw new Error('type error');
+    }
+
+    //  将generator函数的星号替换为 async, 将yield替换为await，仅此而已
+    //  1. 自带执行器   直接执行
+
+    const readFile = async function(val){
+        
+        try{
+            await setStepOne(val);
+        }catch(e){
+            console.error(e);
+        }
+       
+        return 3;
+    }
+    
+    //   返回值是promise
+    readFile(4).then(res => {
+        console.log(res);
+    });
+
+</script>
+</html>

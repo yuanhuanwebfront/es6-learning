@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Set</title>
+</head>
+<body>
+    
+</body>
+<script>
+    
+    let s = new Set();
+
+    [1, 2, 2, 3, 3, 4, 5].forEach(i => {s.add(i)});
+
+    for(let i of s){
+        // console.log(i);
+    }
+
+    //  set数据结构不会存在相同的元素，添加元素使用add方法添加，判断两者相同的方法类似与 ===, 与 === 不同的是对于NaN的判断为相同
+    //  另外，两个对象永远不相等
+
+    let ss = new Set();
+
+    //  set数据操作方法和遍历方法
+    console.log(ss.add(1));             //  添加某个值，返回Set结构本身
+    console.log(ss.delete(1));          //  删除某个值，返回一个布尔值
+    console.log(ss.has(1));             //  返回一个布尔值，表示该值是否为set成员
+    console.log(ss.clear());            //  清空set，没有返回值
+
+
+    //  遍历方法   
+    let setMethod = new Set(['red', 'blue', 'black']);
+
+    console.log(setMethod.keys());                      //  由于数组没有key,value之说
+    console.log(setMethod.values());                    //  所以两者相同
+    console.log(setMethod.entries().next());            //  ['red', 'red']
+    
+
+
+
+
+
+</script>
+</html>
